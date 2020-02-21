@@ -10,6 +10,8 @@ pipeline {
         }
         stage('Build') {
             steps {
+                cd capstone-project
+                app = docker.build("ecme820721/capstone")
                 echo 'Building..'
             }
         }
