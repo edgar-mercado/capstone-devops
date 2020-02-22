@@ -13,6 +13,7 @@ pipeline {
                 echo 'Building..'
                 cd capstone-project
                 sh 'docker build -t "ecme820721/capstone" .'
+                sh 'docker ls'
             }
         }
         stage('Push') {
