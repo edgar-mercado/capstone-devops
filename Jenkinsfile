@@ -10,9 +10,11 @@ pipeline {
         }
         stage('Build') {
             steps {
-                cd capstone-project
-                docker.build("ecme820721/capstone")
                 echo 'Building..'
+                cd capstone-project
+                docker info
+                docker build -t ecme820721/capstone .
+
             }
         }
         stage('Push') {
