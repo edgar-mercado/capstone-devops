@@ -11,6 +11,7 @@ pipeline {
             steps {
                 echo 'Building..'
                 sh 'ls -l'
+                sh 'pwd'
                 sh 'cd capstone-project'
                 sh 'docker build -t "ecme820721/capstone" .'
                 sh 'docker ls'
