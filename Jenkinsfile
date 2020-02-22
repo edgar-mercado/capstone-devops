@@ -12,7 +12,11 @@ pipeline {
         }
         stage('Lint') {
             steps {
-                sh 'pylint *.py'
+                sh 'hadolint Dockerfile'
+                sh 'python3 -m venv ~/.devops'
+            	  sh 'pip install --upgrade pip && pip install -r requirements.txt'
+                sh 'pylint --disable=R,C,W1203 app.py'
+
             }
         }
         stage('Build') {
