@@ -10,6 +10,11 @@ pipeline {
                 checkout scm
             }
         }
+        stage('Lint') {
+            steps {
+                sh 'pylint *.py'
+            }
+        }
         stage('Build') {
             steps {
                 echo 'Building..'
@@ -18,13 +23,13 @@ pipeline {
                 sh 'cd capstone-project'
                 sh 'docker build -t "ecme820721/capstone" .'
                 sh 'docker images'
-                sh 'echo $USER_CREDENTIALS_PSW | docker login --username $USER_CREDENTIALS_USR --password-stdin'
-                sh 'docker push "ecme820721/capstone:latest"'
             }
         }
         stage('Push') {
             steps {
                 echo 'Pushing..'
+                sh 'echo $USER_CREDENTIALS_PSW | docker login --username $USER_CREDENTIALS_USR --password-stdin'
+                sh 'docker push "ecme820721/capstone:latest"'
             }
         }
         stage('Deploy') {
