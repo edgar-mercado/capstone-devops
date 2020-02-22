@@ -18,8 +18,8 @@ pipeline {
                 sh 'cd capstone-project'
                 sh 'docker build -t "ecme820721/capstone" .'
                 sh 'docker images'
-                sh 'cat /home/ubuntu/docker_s.txt | docker login --username ecme820721 --password-stdin'
                 sh "echo $USER_CREDENTIALS_USR"
+                sh 'echo $USER_CREDENTIALS_PSW | docker login --username ecme820721 --password-stdin'
             }
         }
         stage('Push') {
