@@ -13,7 +13,7 @@ pipeline {
                 echo 'Building..'
                 cd capstone-project
                 docker info
-                docker build -t ecme820721/capstone .
+                docker build -t "ecme820721/capstone" .
 
             }
         }
