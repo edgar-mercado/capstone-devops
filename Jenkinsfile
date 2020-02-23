@@ -42,7 +42,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                withAWS(credentials:'eks') {
+                withAWS(credentials:'eks', region: 'us-west-2') {
+                    sh 'aws iam get-user'
                     sh 'aws --version'
                     sh 'which aws'
                     sh 'aws eks update-kubeconfig --name capstone --region us-west-2'
