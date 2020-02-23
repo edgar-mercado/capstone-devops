@@ -42,6 +42,7 @@ pipeline {
             steps {
                 echo 'Deploying....'
                 sh '''#!/bin/bash
+                      echo $HOME
                       kubectl version --short --client
                       #dockerpath=ecme820721/capstone
 
