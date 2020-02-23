@@ -1,6 +1,6 @@
 import logging
 
-from flask import Flask, request, jsonify
+from flask import Flask
 from flask.logging import create_logger
 
 app = Flask(__name__)
@@ -10,9 +10,9 @@ LOG.setLevel(logging.INFO)
 
 @app.route("/")
 def home():
-"""
-Root endpoint
-"""
+    """
+    Root endpoint
+    """
     return "<h1>Udacity pipeline test successful</h1>"
 
 if __name__ == "__main__":
