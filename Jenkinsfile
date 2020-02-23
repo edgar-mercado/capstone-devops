@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Lint') {
             steps {
-                bash '''#!/bin/bash
+                sh '''#!/bin/bash
                         echo "hello world"
                         python3 -m venv ~/.devops
                         source ~/.devops/bin/activate
