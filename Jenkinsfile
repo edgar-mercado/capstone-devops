@@ -43,6 +43,7 @@ pipeline {
                 echo 'Deploying....'
                 withAWS(credentials:'eks') {
                     sh 'aws --version'
+                    sh 'which aws'
                     sh 'aws eks update-kubeconfig --name arn:aws:eks:us-west-2:947114706565:cluster/capstone'
                     sh 'kubectl config use-context arn:aws:eks:us-west-2:947114706565:cluster/capstone'
                 }
