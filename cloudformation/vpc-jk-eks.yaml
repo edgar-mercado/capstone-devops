@@ -196,6 +196,9 @@ Resources:
           sudo apt-get install python3-venv -y
           sudo apt-get install awscli -y
           sudo apt-get install pylint -y
+          curl -o kubectl https://amazon-eks.s3-us-west-2.amazonaws.com/1.14.6/2019-08-22/bin/linux/amd64/kubectl
+          chmod +x ./kubectl
+          mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
           apt-get install heat-cfntools -y
           /opt/aws/bin/cfn-init -v --stack ${AWS::StackName} --resource JenkinsBox --configsets Install,Configure,Restart --region ${AWS::Region}
 
