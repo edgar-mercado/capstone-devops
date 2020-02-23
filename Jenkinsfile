@@ -11,8 +11,7 @@ pipeline {
             }
         }
         stage('Lint') {
-            steps {
-                sh 'hadolint Dockerfile'
+            steps {                
                 sh 'python3 -m venv ~/.devops'
                 sh 'source ~/.devops/bin/activate'
             	  sh 'pip3 install -r requirements.txt'
