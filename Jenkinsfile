@@ -11,12 +11,14 @@ pipeline {
             }
         }
         stage('Lint') {
-            steps {                
-                sh 'python3 -m venv ~/.devops'
-                sh 'source ~/.devops/bin/activate'
-            	  sh 'pip3 install -r requirements.txt'
-                sh '~/.devops/bin/pylint --disable=R,C,W1203 app.py'
-
+            steps {
+                bash '''#!/bin/bash
+                        echo "hello world"
+                        python3 -m venv ~/.devops
+                        source ~/.devops/bin/activate
+                        pip3 install -r requirements.txt
+                        ~/.devops/bin/pylint --disable=R,C,W1203 app.py
+                '''
             }
         }
         stage('Build') {
