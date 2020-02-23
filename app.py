@@ -10,6 +10,9 @@ LOG.setLevel(logging.INFO)
 
 @app.route("/")
 def home():
+    """
+    Root endpoint 
+    """
     return "<h1>Udacity pipeline test successful</h1>"
 
 if __name__ == "__main__":
