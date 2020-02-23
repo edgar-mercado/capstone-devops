@@ -41,6 +41,17 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
+                sh '''#!/bin/bash
+                      kubectl version --short --client
+                      #dockerpath=ecme820721/capstone
+
+                      #kubectl run --image=$dockerpath capstone --port=80 -n udacity
+
+                      #kubectl get pods -n udacity
+                      #podname=$(kubectl get pods -o json -n sre | jq -r .items[].metadata.name)
+                      #sleep 30
+                      #kubectl port-forward $podname  8000:80
+                '''
             }
         }
         stage('Test') {

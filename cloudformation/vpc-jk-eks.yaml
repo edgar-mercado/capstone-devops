@@ -194,6 +194,7 @@ Resources:
           sudo usermod -aG docker jenkins
           sudo apt-get install python3-pip -y
           sudo apt-get install python3-venv -y
+          sudo apt-get install awscli -y
           sudo apt-get install pylint -y
           apt-get install heat-cfntools -y
           /opt/aws/bin/cfn-init -v --stack ${AWS::StackName} --resource JenkinsBox --configsets Install,Configure,Restart --region ${AWS::Region}
