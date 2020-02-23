@@ -3,8 +3,8 @@ import logging
 from flask import Flask
 from flask.logging import create_logger
 
-app = Flask(__name__)
-LOG = create_logger(app)
+APP = Flask(__name__)
+LOG = create_logger(APP)
 LOG.setLevel(logging.INFO)
 
 
@@ -16,5 +16,4 @@ def home():
     return "<h1>Udacity pipeline test successful</h1>"
 
 if __name__ == "__main__":
-    # load pretrained model as clf
-    app.run(host='0.0.0.0', port=80, debug=True) # specify port=80
+    APP.run(host='0.0.0.0', port=80, debug=True)
