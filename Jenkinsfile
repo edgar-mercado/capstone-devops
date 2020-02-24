@@ -44,19 +44,15 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                // withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'eks-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                //     AWS("eks update-kubeconfig --name capstone --region us-west-2")
-                // }
                 sh 'kubectl config use-context arn:aws:eks:us-west-2:947114706565:cluster/capstone'
                 sh 'kubectl config current-context'
                 sh '''#!/bin/bash
-                      kubectl version --short --client
-                      kubectl get namespaces
                       dockerpath=ecme820721/capstone:$BUILD_NUMBER
 
-                      kubectl run --image=$dockerpath capstone --port=80 -n udacity
-                      kubectl set image deployments/capstone capstone=$dockerpath -n udacity
+                      kubectl run --image=$dockerpath capstone --port=80 --replicas=3 -n udacity
 
+                      # Perform a rolling update
+                      kubectl set image deployments/capstone capstone=$dockerpath -n udacity
                       kubectl get pods -n udacity
                       podname=$(kubectl get pods -o json -n udacity | jq -r .items[].metadata.name)
                       sleep 30
