@@ -12,7 +12,7 @@ def home():
     """
     Root endpoint
     """
-    return "<h1>Udacity pipeline test successful :/</h1>"
+    return "<h1>Udacity pipeline test successful!!!!/</h1>"
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=80, debug=True)
