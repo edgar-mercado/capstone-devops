@@ -46,16 +46,8 @@ pipeline {
                 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'eks-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
                     AWS("eks update-kubeconfig --name capstone --region us-west-2")
                 }
-                withAWS(credentials:'eks', region: 'us-west-2') {
-                    sh 'export aws_access_key_id=$AWS_CREDENTIALS_USR'
-                    sh 'export aws_secret_access_key=$AWS_CREDENTIALS_PSW'
-                    sh 'export region=us-west-2'
-                    sh 'aws --version'
-                    sh 'which aws'
-                    sh 'aws eks update-kubeconfig --name capstone --region us-west-2'
-                    sh 'kubectl config use-context arn:aws:eks:us-west-2:947114706565:cluster/capstone'
-                    sh 'kubectl config current-context'
-                }
+                sh 'kubectl config use-context arn:aws:eks:us-west-2:947114706565:cluster/capstone'
+                sh 'kubectl config current-context'
                 sh '''#!/bin/bash
                       kubectl version --short --client
                       kubectl get namespaces
