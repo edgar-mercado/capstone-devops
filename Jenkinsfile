@@ -59,7 +59,7 @@ pipeline {
                       kubectl run --image=$dockerpath capstone --port=80 -n udacity
 
                       kubectl get pods -n udacity
-                      podname=$(kubectl get pods -o json -n sre | jq -r .items[].metadata.name)
+                      podname=$(kubectl get pods -o json -n udacity | jq -r .items[].metadata.name)
                       sleep 30
                       kubectl port-forward $podname  8000:80
                 '''
