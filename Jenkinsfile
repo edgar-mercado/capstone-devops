@@ -31,13 +31,14 @@ pipeline {
                 sh 'cd capstone-project'
                 sh 'docker build -t "ecme820721/capstone" .'
                 sh 'docker images'
+                sh 'docker tag ecme820721/capstone:latest ecme820721/capstone:$BUILD_NUMBER'
             }
         }
         stage('Push') {
             steps {
                 echo 'Pushing..'
                 sh 'echo $USER_CREDENTIALS_PSW | docker login --username $USER_CREDENTIALS_USR --password-stdin'
-                sh 'docker push "ecme820721/capstone:latest"'
+                sh 'docker push ecme820721/capstone:$BUILD_NUMBER'
             }
         }
         stage('Deploy') {
@@ -51,7 +52,7 @@ pipeline {
                 sh '''#!/bin/bash
                       kubectl version --short --client
                       kubectl get namespaces
-                      dockerpath=ecme820721/capstone
+                      dockerpath=ecme820721/capstone:$BUILD_NUMBER
 
                       kubectl run --image=$dockerpath capstone --port=80 -n udacity
 
