@@ -1,3 +1,4 @@
+@Library('github.com/releaseworks/jenkinslib') _
 pipeline {
     agent any
     environment {
@@ -19,7 +20,6 @@ pipeline {
                         source ~/.devops/bin/activate
                         pip3 install -r requirements.txt
                         ~/.devops/bin/pylint --disable=R,C,W1203 app.py
-                        pip3 install --upgrade --user awscli
                 '''
             }
         }
@@ -43,6 +43,9 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
+                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'eks', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                    AWS("--region=us-west-2 aws eks update-kubeconfig --name capstone --region us-west-2")
+                }
                 withAWS(credentials:'eks', region: 'us-west-2') {
                     sh 'export aws_access_key_id=$AWS_CREDENTIALS_USR'
                     sh 'export aws_secret_access_key=$AWS_CREDENTIALS_PSW'
