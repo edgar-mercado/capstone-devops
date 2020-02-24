@@ -51,6 +51,7 @@ pipeline {
                     sh 'which aws'
                     sh 'aws eks update-kubeconfig --name capstone --region us-west-2'
                     sh 'kubectl config use-context arn:aws:eks:us-west-2:947114706565:cluster/capstone'
+                    sh 'kubectl config current-context'                    
                 }
                 sh '''#!/bin/bash
                       kubectl version --short --client
