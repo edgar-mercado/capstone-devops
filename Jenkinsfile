@@ -84,6 +84,7 @@ pipeline {
                         fi
                         sleep 10
                       done
+                      echo "http://${host}"
                 '''
             }
         }
