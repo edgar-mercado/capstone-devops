@@ -43,7 +43,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'eks', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'eks-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
                     AWS("--region=us-west-2 aws eks update-kubeconfig --name capstone --region us-west-2")
                 }
                 withAWS(credentials:'eks', region: 'us-west-2') {
