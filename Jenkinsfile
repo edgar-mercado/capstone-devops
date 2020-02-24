@@ -15,7 +15,7 @@ pipeline {
         stage('Lint') {
             steps {
                 sh '''#!/bin/bash
-\                        python3 -m venv ~/.devops
+                        python3 -m venv ~/.devops
                         source ~/.devops/bin/activate
                         pip3 install -r requirements.txt
                         ~/.devops/bin/pylint --disable=R,C,W1203 app.py
