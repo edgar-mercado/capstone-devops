@@ -28,7 +28,7 @@ pipeline {
                 sh 'ls -l'
                 sh 'pwd'
                 sh 'cd capstone-project'
-                sh 'sed 's/@version@/$BUILD_NUMBER/g' templates/header.html > templates/header.html'
+                sh 'sed 's/XXXXXX/${BUILD_NUMBER}/g' templates/header.html > templates/header.html'
                 sh 'docker build -t "ecme820721/capstone" .'
                 sh 'docker images'
                 sh 'docker tag ecme820721/capstone:latest ecme820721/capstone:$BUILD_NUMBER'
