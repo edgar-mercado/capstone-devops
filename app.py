@@ -14,7 +14,7 @@ def home():
     """
     Root endpoint
     """
-    LOG.INFO("Request made to /")
+    LOG.info("Request made to /")
     return render_template('static/index.html')
 
 if __name__ == "__main__":
