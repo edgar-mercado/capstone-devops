@@ -15,8 +15,7 @@ pipeline {
         stage('Lint') {
             steps {
                 sh '''#!/bin/bash
-                        echo "hello world"
-                        python3 -m venv ~/.devops
+\                        python3 -m venv ~/.devops
                         source ~/.devops/bin/activate
                         pip3 install -r requirements.txt
                         ~/.devops/bin/pylint --disable=R,C,W1203 app.py
@@ -29,6 +28,7 @@ pipeline {
                 sh 'ls -l'
                 sh 'pwd'
                 sh 'cd capstone-project'
+                sh 'sed 's/@version@/$BUILD_NUMBER/g' templates/header.html > templates/header.html'
                 sh 'docker build -t "ecme820721/capstone" .'
                 sh 'docker images'
                 sh 'docker tag ecme820721/capstone:latest ecme820721/capstone:$BUILD_NUMBER'
