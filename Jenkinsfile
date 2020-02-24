@@ -28,7 +28,8 @@ pipeline {
                 sh 'ls -l'
                 sh 'pwd'
                 sh 'cd capstone-project'
-                sh 'sed "s/XXXXXX/${BUILD_NUMBER}/g" templates/header.html > templates/header.html'
+                String filenew = readFile('templates/header.html').replaceAll('XXXXXX',${BUILD_NUMBER})
+                writeFile file:'templates/header.html', text: filenew
                 sh 'docker build -t "ecme820721/capstone" .'
                 sh 'docker images'
                 sh 'docker tag ecme820721/capstone:latest ecme820721/capstone:$BUILD_NUMBER'
