@@ -55,6 +55,7 @@ pipeline {
                       dockerpath=ecme820721/capstone:$BUILD_NUMBER
 
                       kubectl run --image=$dockerpath capstone --port=80 -n udacity
+                      kubectl set image deployments/capstone capstone=$dockerpath -n udacity
 
                       kubectl get pods -n udacity
                       podname=$(kubectl get pods -o json -n udacity | jq -r .items[].metadata.name)
