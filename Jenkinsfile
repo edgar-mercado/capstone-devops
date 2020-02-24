@@ -58,7 +58,10 @@ pipeline {
                       kubectl get pods -n udacity
                       podname=$(kubectl get pods -o json -n udacity | jq -r .items[].metadata.name)
                       sleep 30
-                      kubectl port-forward $podname  8000:80
+                      kubectl expose deployment capstone --type=LoadBalancer --name=capstone-service -n udacity
+                      kubectl get service/capstone-service -n udacity |  awk {'print $1" " $2 " " $4 " " $5'} | column -t
+
+
                 '''
             }
         }
