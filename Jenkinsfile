@@ -43,9 +43,9 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'eks-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                    AWS("eks update-kubeconfig --name capstone --region us-west-2")
-                }
+                // withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'eks-key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                //     AWS("eks update-kubeconfig --name capstone --region us-west-2")
+                // }
                 sh 'kubectl config use-context arn:aws:eks:us-west-2:947114706565:cluster/capstone'
                 sh 'kubectl config current-context'
                 sh '''#!/bin/bash
