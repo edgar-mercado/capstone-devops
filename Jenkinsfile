@@ -49,7 +49,7 @@ pipeline {
                 sh '''#!/bin/bash
                       dockerpath=ecme820721/capstone:$BUILD_NUMBER
 
-                      kubectl run --image=$dockerpath capstone --port=80 --replicas=3 -n udacity
+                      kubectl run --labels='app=capstone' --image=$dockerpath capstone --port=80 --replicas=3 -n udacity
 
                       # Perform a rolling update
                       kubectl set image deployments/capstone capstone=$dockerpath -n udacity
@@ -58,14 +58,33 @@ pipeline {
                       sleep 30
                       kubectl expose deployment capstone --type=LoadBalancer --name=capstone-service -n udacity
                       kubectl get service/capstone-service -n udacity |  awk {'print $1" " $2 " " $4 " " $5'} | column -t
-
-
+                      while [[ $(kubectl get pods -l app=capstone -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]];
+                      do
+                        echo "waiting for pod" && sleep 1;
+                      done
                 '''
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing....'
+                sh '''#!/bin/bash
+                      host=$(kubectl get service/capstone-service -n udacity -o json | jq -r .status.loadBalancer.ingress[].hostname)
+                      port=$(kubectl get service/capstone-service -n udacity -o json | jq -r .spec.ports[].port)
+
+                      while true
+                      do
+                        STATUS=$(curl -s -o /dev/null -w '%{http_code}' http://${host})
+                        if [ $STATUS -eq 200 ]; then
+                          echo "Got 200! All done!"
+                          break
+                        else
+                          echo "Got $STATUS :( Not done yet..."
+                          exit 1
+                        fi
+                        sleep 10
+                      done
+                '''
             }
         }
     }
