@@ -58,7 +58,7 @@ pipeline {
                       sleep 30
                       kubectl expose deployment capstone --type=LoadBalancer --name=capstone-service -n udacity
                       kubectl get service/capstone-service -n udacity |  awk {'print $1" " $2 " " $4 " " $5'} | column -t
-                      while [[ $(kubectl get pods -l app=capstone -n udacity -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]];
+                      while [[ $(kubectl get pods -l app=capstone -n udacity -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True True True" ]];
                       do
                         echo "waiting for pod" && sleep 1;
                       done
