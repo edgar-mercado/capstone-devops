@@ -2,6 +2,8 @@ import logging
 
 from flask import Flask
 from flask.logging import create_logger
+from flask import render_template
+
 
 app = Flask(__name__)
 LOG = create_logger(app)
@@ -12,6 +14,7 @@ def home():
     """
     Root endpoint
     """
+    LOG.INFO("Request made to /")
     return render_template('static/index.html')
 
 if __name__ == "__main__":
