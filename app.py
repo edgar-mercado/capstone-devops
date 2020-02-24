@@ -5,7 +5,7 @@ from flask.logging import create_logger
 from flask import render_template
 
 
-app = Flask(__name__, template_folder='template')
+app = Flask(__name__, template_folder='templates')
 LOG = create_logger(app)
 LOG.setLevel(logging.INFO)
 
