@@ -28,7 +28,7 @@ pipeline {
                 sh 'ls -l'
                 sh 'pwd'
                 sh 'cd capstone-project'
-                sh 'echo "<h1>BUILD VERSION: ${BUILD_NUMBER}</h1>" > templates/header.html'
+                sh 'echo "<h1>BUILD VERSION: ${BUILD_NUMBER} </h1><h2>Deployed at ${date}</h2>" > templates/header.html'
                 sh 'docker build -t "ecme820721/capstone" .'
                 sh 'docker images'
                 sh 'docker tag ecme820721/capstone:latest ecme820721/capstone:$BUILD_NUMBER'
