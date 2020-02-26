@@ -70,6 +70,8 @@ $ kubectl create namespace udacity
 8. Configure Jenkins and install the plugins BlueOcean and AWS
 9. [Add the GitHub webhool to Jenkins](https://dzone.com/articles/adding-a-github-webhook-in-your-jenkins-pipeline)
 10. Commit a code change in app.py or run the Jenkins job manually to start the rolling up deploy
-11. Review the Jenkins job logs and test the ULR provided in the logs
+11. Check how the rolling deploy is being performed
+![Rolling Update](img/rolling_update.png)
+12. Review the Jenkins job logs and test the ULR provided in the logs, the build version in the webpage is updated according to each job execution
 ![Jenkins logs](img/jenkins_pipeline.png)
 ![Architecture](img/test.png)
