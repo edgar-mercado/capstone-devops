@@ -52,7 +52,9 @@ Building Docker containers in pipelines
 $ git clone git@github.com:<your-GitHub-user>/capstone-devops.git
 $ cd capstone-devops
 ```
+
 2. Create an IAM user and configure your aws cli
+
 3. Run the script to create the pipeline
 ```
 $ cd cloudformation
@@ -60,19 +62,27 @@ $ chmod +x stack-helper.sh
 $ ./stack-helper.sh create capstone vpc-jk-eks.yaml params.json
 ```
 `stack-helper.sh` is an script created to simplify the CloudFormation calls
+
 4. Wait for the pipeline to complete the creation
 ![Stack complete](img/stack_complete.png)
+
 5. [Add an EKS Node Group](https://docs.aws.amazon.com/eks/latest/userguide/create-managed-node-group.html)
+
 6. [Provide access to the EKS cluster](https://aws.amazon.com/premiumsupport/knowledge-center/amazon-eks-cluster-access/)
+
 7. Create a namespaces called udacity
 ```
 $ kubectl create namespace udacity
 ```
 8. Configure Jenkins and install the plugins BlueOcean and AWS
+
 9. [Add the GitHub webhook to Jenkins](https://dzone.com/articles/adding-a-github-webhook-in-your-jenkins-pipeline)
+
 10. Commit a code change in app.py or run the Jenkins job manually to start the rolling up deploy
+
 11. Check how the rolling deploy is being performed
 ![Rolling Update](img/rolling_update.png)
+
 12. Review the Jenkins job logs and test the ULR provided in the logs, the build version in the webpage is updated according to each job execution
 ![Jenkins logs](img/jenkins_pipeline.png)
 ![Architecture](img/test.png)
