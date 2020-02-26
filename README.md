@@ -9,12 +9,12 @@
 
 ## Description
 
-Capstone is a project created to implement the knowladge gained during the DevOps nanodegree course from Udacity. These include:
+Capstone is a project created to implement the knowladge gained during the DevOps nanodegree course from Udacity, this pipeline used rolling up deployments to update the service. This pipeline is:
 
 Working in AWS
 Using Jenkins to implement Continuous Integration and Continuous Deployment
 Building pipelines
-Working with Ansible and CloudFormation to deploy clusters
+Working with  CloudFormation to deploy clusters
 Building Kubernetes clusters
 Building Docker containers in pipelines
 
@@ -47,9 +47,9 @@ Building Docker containers in pipelines
 7. kubectl
 
 ## Steps to setup the pipeline
-1. Clone the repository
+1. Fork and clone the repository
 ```
-$ git clone git@github.com:edgar-mercado/capstone-devops.git
+$ git clone git@github.com:<your-GitHub-user>/capstone-devops.git
 $ cd capstone-devops
 ```
 2. Create an IAM user and configure your aws cli
@@ -60,11 +60,16 @@ $ chmod +x stack-helper.sh
 $ ./stack-helper.sh create capstone vpc-jk-eks.yaml params.json
 ```
 4. Wait for the pipeline to complete the creation
+![Stack complete](img/stack_complete.png)
 5. [Add an EKS Node Group](https://docs.aws.amazon.com/eks/latest/userguide/create-managed-node-group.html)
-6. Create a namespaces called udacity
+6. [Provide access to the EKS cluster](https://aws.amazon.com/premiumsupport/knowledge-center/amazon-eks-cluster-access/)
+7. Create a namespaces called udacity
 ```
 $ kubectl create namespace udacity
 ```
-7. Configure Jenkins and install the plugins BlueOcean and AWS
-8. [Add the GitHub webhool to Jenkins](https://dzone.com/articles/adding-a-github-webhook-in-your-jenkins-pipeline)
-9.
+8. Configure Jenkins and install the plugins BlueOcean and AWS
+9. [Add the GitHub webhool to Jenkins](https://dzone.com/articles/adding-a-github-webhook-in-your-jenkins-pipeline)
+10. Commit a code change in app.py or run the Jenkins job manually to start the rolling up deploy
+11. Review the Jenkins job logs and test the ULR provided in the logs
+![Jenkins logs](img/jenkins_pipeline.png)
+![Architecture](img/test.png)
