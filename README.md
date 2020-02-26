@@ -59,6 +59,7 @@ $ cd cloudformation
 $ chmod +x stack-helper.sh
 $ ./stack-helper.sh create capstone vpc-jk-eks.yaml params.json
 ```
+`stack-helper.sh` is an script created to simplify the CloudFormation calls
 4. Wait for the pipeline to complete the creation
 ![Stack complete](img/stack_complete.png)
 5. [Add an EKS Node Group](https://docs.aws.amazon.com/eks/latest/userguide/create-managed-node-group.html)
@@ -68,7 +69,7 @@ $ ./stack-helper.sh create capstone vpc-jk-eks.yaml params.json
 $ kubectl create namespace udacity
 ```
 8. Configure Jenkins and install the plugins BlueOcean and AWS
-9. [Add the GitHub webhool to Jenkins](https://dzone.com/articles/adding-a-github-webhook-in-your-jenkins-pipeline)
+9. [Add the GitHub webhook to Jenkins](https://dzone.com/articles/adding-a-github-webhook-in-your-jenkins-pipeline)
 10. Commit a code change in app.py or run the Jenkins job manually to start the rolling up deploy
 11. Check how the rolling deploy is being performed
 ![Rolling Update](img/rolling_update.png)
